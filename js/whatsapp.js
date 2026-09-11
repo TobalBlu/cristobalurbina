@@ -1,4 +1,4 @@
-// Solicitud por WhatsApp: junta los servicios marcados y la hora,
+// Solicitud por WhatsApp: junta servicios marcados y datos opcionales,
 // arma el mensaje y lo pone en el enlace wa.me.
 // La web no envía nada: la persona aprieta "enviar" en su WhatsApp.
 (function () {
@@ -8,10 +8,16 @@
   var tipos = document.querySelectorAll('input[name="tipo"]');
   var receptores = document.getElementById('receptores');
   var panelTipos = document.getElementById('tipos-receptor');
-  var hora = document.getElementById('hora');
   var vista = document.getElementById('vista-previa');
   var boton = document.getElementById('enviar-wsp');
   if (!boton || !casillas.length) return;
+
+  // Campos opcionales: [id del campo, cómo se presenta en el mensaje]
+  var extras = [
+    ['web-actual', 'Mi página actual'],
+    ['gb-actual', 'Mi Google Business'],
+    ['referencia', 'Una página que me gusta como referencia']
+  ];
 
   // "a", "a y b", "a, b y c"
   function unir(lista) {
@@ -27,24 +33,25 @@
       if (c === receptores) {
         var t = [];
         tipos.forEach(function (x) { if (x.checked) t.push(x.value); });
-        if (t.length) texto += ' (' + unir(t) + ')';   // receptores de reseñas (NFC y QR)
+        if (t.length) texto += ' (' + unir(t) + ')';
       }
       elegidos.push(texto);
     });
     if (!elegidos.length) return null;
 
-    var mensaje = 'Hola, estoy interesado en ' + unir(elegidos) + '. ';
-    if (hora.value) {
-      var articulo = hora.value.indexOf('01:') === 0 ? 'a la ' : 'a las ';
-      mensaje += 'Me gustaría que me devolvieras un llamado ' + articulo + hora.value + '.';
-    } else {
-      mensaje += 'Me gustaría que me devolvieras un llamado cuando puedas.';
-    }
+    var mensaje = 'Hola, estoy interesado en ' + unir(elegidos) +
+                  '. Me gustaría que me devolvieras un llamado.';
+
+    var lineas = [];
+    extras.forEach(function (e) {
+      var valor = document.getElementById(e[0]).value.trim();
+      if (valor) lineas.push(e[1] + ': ' + valor);
+    });
+    if (lineas.length) mensaje += '\n\n' + lineas.join('\n');
     return mensaje;
   }
 
   function actualizar() {
-    // El menú de tipos solo aparece con "Receptores de reseñas" marcado
     panelTipos.hidden = !receptores.checked;
     receptores.setAttribute('aria-expanded', String(receptores.checked));
     if (!receptores.checked) tipos.forEach(function (x) { x.checked = false; });
@@ -70,6 +77,6 @@
 
   casillas.forEach(function (c) { c.addEventListener('change', actualizar); });
   tipos.forEach(function (c) { c.addEventListener('change', actualizar); });
-  hora.addEventListener('input', actualizar);
+  extras.forEach(function (e) { document.getElementById(e[0]).addEventListener('input', actualizar); });
   actualizar();
 })();

@@ -45,11 +45,10 @@
         <div class="portada__texto">
           <h1>Cristóbal<br>Urbina</h1>
           <div class="cajetin" role="group" aria-label="Datos del profesional">
-            <p class="cajetin__area">Soluciones y conectividad</p>
+            <p class="cajetin__area">Asesorías e Ingeniería</p>
             <p class="cajetin__titulo">Ingeniero Mecánico, USACH</p>
             <p class="cajetin__lugar">Santiago, Chile</p>
           </div>
-          <a class="boton" href="#contacto">Solicitar un llamado</a>
         </div>
       </div>
     </section>
@@ -60,7 +59,7 @@
         <div>
           <h2 id="t-web">Páginas web</h2>
           <p class="entrada">Pon tu servicio a disposición.</p>
-          <p>Una página web y un perfil de Google Business permiten que las personas que necesitan lo que haces te encuentren fácil.</p>
+          <p>Una página web y un perfil de Google Business permiten que las personas encuentren tu negocio.</p>
         </div>
 
         <!-- Carrusel de ejemplos: pantalla 4 del plan. En escritorio va a la izquierda. -->
@@ -72,7 +71,7 @@
     <section id="google-business" class="pantalla" aria-labelledby="t-gb">
       <div class="contenedor">
         <h2 id="t-gb">Tu página y tu Google Business, juntos</h2>
-        <p class="entrada">Muestra en tu página las reseñas que tienes en Google y dale confianza a quien te visita por primera vez.</p>
+        <p class="entrada">Las reseñas de Google le dan visibilidad a tu página, y mostrarlas en tu página le da más confianza a tus clientes.</p>
         <!-- Unión página ↔ ficha de Google: pantalla 5 del plan -->
         <div class="union pendiente">Página web + ficha de Google</div>
       </div>
@@ -82,8 +81,19 @@
     <section id="resenas" class="pantalla pantalla--plano" aria-labelledby="t-resenas">
       <div class="contenedor">
         <h2 id="t-resenas">Receptores de reseñas</h2>
-        <p class="entrada">Cualquiera puede pagar para salir primero en Google. Salir primero porque tus clientes te recomiendan es otra cosa.</p>
-        <p>Con receptores de madera, tarjetas y stickers QR, tus clientes te dejan una reseña en segundos. Cada reseña suma visibilidad a tu negocio en Google.</p>
+        <p class="entrada">Cualquiera puede pagar para aparecer en Google. Salir potenciado por las recomendaciones de tus clientes es diferenciador.</p>
+        <p>Facilítale el camino a tus clientes con QR y NFC en receptores, tarjetas o stickers. Cada reseña suma visibilidad a tu negocio en Google.</p>
+
+        <!-- Demostración: el mismo mecanismo, apuntando a tu propia ficha -->
+        <div class="demo-resena">
+          <img class="demo-resena__qr" src="img/qr-resena.svg" width="160" height="160" alt="Código QR para dejar una reseña de Cristóbal Urbina en Google">
+          <div>
+            <p class="demo-resena__titulo">Así funciona</p>
+            <p>Escanea el código con tu celular, o toca el botón si ya estás en él, y llegas directo a dejarme una reseña. Es lo mismo que vivirán tus clientes con un receptor.</p>
+            <a class="boton boton--claro" href="https://g.page/r/CSdmmgslL0hoEBI/review" target="_blank" rel="noopener">Dejar una reseña</a>
+          </div>
+        </div>
+
         <!-- Fotos de receptores: pantalla 6 del plan -->
         <div class="receptores pendiente">Receptores NFC y QR</div>
       </div>
@@ -104,7 +114,6 @@
             <legend>¿Qué te interesa?</legend>
             <label class="opcion"><input type="checkbox" name="servicio" value="página web"> Página web</label>
             <label class="opcion"><input type="checkbox" name="servicio" value="Google Business"> Google Business</label>
-            <label class="opcion"><input type="checkbox" name="servicio" value="WhatsApp Business"> WhatsApp Business</label>
             <label class="opcion"><input type="checkbox" name="servicio" value="receptores de reseñas" id="receptores" aria-controls="tipos-receptor" aria-expanded="false"> Receptores de reseñas</label>
 
             <fieldset id="tipos-receptor" class="subopciones" hidden>
@@ -114,10 +123,21 @@
             </fieldset>
           </fieldset>
 
-          <div class="campo">
-            <label for="hora">¿A qué hora te llamo? <span class="opcional">(opcional)</span></label>
-            <input type="time" id="hora" name="hora">
-          </div>
+          <details class="extras">
+            <summary>Opcional: cuéntame de tu negocio actual</summary>
+            <div class="campo">
+              <label for="web-actual">Tu página web actual</label>
+              <input type="url" id="web-actual" inputmode="url" autocomplete="url" placeholder="tunegocio.cl">
+            </div>
+            <div class="campo">
+              <label for="gb-actual">Tu Google Business actual</label>
+              <input type="text" id="gb-actual" placeholder="Nombre en Google o enlace">
+            </div>
+            <div class="campo">
+              <label for="referencia">Una página que te guste como referencia</label>
+              <input type="url" id="referencia" inputmode="url" placeholder="ejemplo.cl">
+            </div>
+          </details>
 
           <div class="mensaje" aria-live="polite">
             <p class="mensaje__titulo">Tu mensaje</p>

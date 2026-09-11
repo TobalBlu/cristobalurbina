@@ -145,6 +145,7 @@ a:hover { color: var(--azul-2); }
   margin-top: 1.75rem; padding: 0 1.375rem;
   background: var(--azul); color: var(--blanco);
   font-weight: 600; text-decoration: none; border-radius: 2px;
+  text-align: center; line-height: 1.3;
 }
 .boton:hover { background: var(--azul-2); color: var(--blanco); }
 
@@ -161,6 +162,19 @@ a:hover { color: var(--azul-2); }
 .cajetin .cajetin__area { grid-column: 1 / -1; font-family: var(--serif); font-weight: 600; font-size: 1.25rem; }
 .cajetin .cajetin__titulo,
 .cajetin .cajetin__lugar { font-size: .875rem; color: var(--grafito); }
+
+/* ---------- 4 · Demostración de reseña ---------- */
+.demo-resena {
+  display: grid; gap: 1.25rem; align-items: center;
+  margin-top: 2.5rem; padding: 1.5rem;
+  background: var(--blanco);
+  border: 2px solid var(--tinta);
+  max-width: 44rem;
+}
+.demo-resena__qr { width: 9rem; height: 9rem; }
+.demo-resena__titulo { font-family: var(--serif); font-weight: 600; font-size: 1.375rem; margin-bottom: .25rem; }
+.boton--claro { background: var(--blanco); color: var(--azul); border: 2px solid var(--azul); }
+.boton--claro:hover { background: var(--azul); color: var(--blanco); }
 
 /* ---------- Bloques visuales pendientes (se reemplazan en cada tarea) ---------- */
 .pendiente {
@@ -213,9 +227,26 @@ a:hover { color: var(--azul-2); }
   border: 1px solid var(--grafito); border-radius: 2px;
 }
 
+/* Opcionales: línea discreta que despliega los campos */
+.extras { margin-top: 1.25rem; }
+.extras summary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  min-height: 2.75rem; cursor: pointer;
+  font-style: italic; color: var(--grafito);
+  list-style: none;
+}
+.extras summary::-webkit-details-marker { display: none; }
+.extras summary::before { content: "+"; font-style: normal; font-weight: 600; width: 1rem; }
+.extras[open] summary::before { content: "−"; }
+.extras summary:hover { color: var(--tinta); }
+.extras .campo:first-of-type { margin-top: .75rem; }
+.extras .campo { margin-top: 1rem; }
+.extras .campo label { font-weight: 500; font-size: .9375rem; }
+.extras .campo input { width: 100%; }
+
 .mensaje { margin-top: 1.75rem; padding: 1rem; background: var(--plano); border-left: 3px solid var(--azul); }
 .mensaje__titulo { font-size: .875rem; color: var(--grafito); }
-.mensaje__texto { margin-top: .25rem !important; }
+.mensaje__texto { margin-top: .25rem !important; white-space: pre-line; }
 
 .boton--ancho { width: 100%; justify-content: center; text-align: center; }
 .boton[aria-disabled="true"] { background: var(--linea); color: var(--grafito); cursor: not-allowed; }
@@ -247,4 +278,5 @@ a:hover { color: var(--azul-2); }
 
   .solicitar { margin-inline: 0; padding: 2rem; border: 2px solid var(--tinta); }
   .boton--ancho { width: auto; }
+  .demo-resena { grid-template-columns: auto 1fr; gap: 2rem; }
 }
