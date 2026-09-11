@@ -231,7 +231,74 @@ a:hover { color: var(--azul-2); }
   color: var(--grafito);
   font-size: .9375rem;
 }
-.solicitar { margin-top: 2.5rem; }
+/* ---------- Solicitud por WhatsApp ---------- */
+.solicitar {
+  margin-top: 2.5rem;
+  padding: 1.5rem var(--margen);
+  margin-inline: calc(var(--margen) * -1);   /* en móvil ocupa todo el ancho */
+  background: var(--blanco);
+  border-block: 2px solid var(--tinta);
+}
+.solicitar > p { color: var(--grafito); }
+
+.opciones {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  border: 0;
+}
+.opciones legend {
+  padding: 0;
+  margin-bottom: .5rem;
+  font-weight: 600;
+}
+.opcion {
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  min-height: 3.25rem;
+  padding: .5rem 0;
+  border-top: 1px solid var(--linea);
+  cursor: pointer;
+}
+.opcion:last-of-type { border-bottom: 1px solid var(--linea); }
+.opcion input {
+  width: 1.375rem;
+  height: 1.375rem;
+  margin: 0;
+  flex: none;
+  accent-color: var(--azul);
+}
+
+.campo { margin-top: 1.5rem; }
+.campo label { display: block; font-weight: 600; margin-bottom: .5rem; }
+.opcional { font-weight: 400; color: var(--grafito); }
+.campo input {
+  font: inherit;
+  min-height: 3rem;
+  min-width: 10rem;
+  padding: 0 .75rem;
+  color: var(--tinta);
+  background: var(--blanco);
+  border: 1px solid var(--grafito);
+  border-radius: 2px;
+}
+
+.mensaje {
+  margin-top: 1.75rem;
+  padding: 1rem;
+  background: var(--plano);
+  border-left: 3px solid var(--azul);
+}
+.mensaje__titulo { font-size: .875rem; color: var(--grafito); }
+.mensaje__texto { margin-top: .25rem; }
+
+.boton--ancho { width: 100%; justify-content: center; text-align: center; }
+.boton[aria-disabled="true"] {
+  background: var(--linea);
+  color: var(--grafito);
+  cursor: not-allowed;
+}
+.nota { margin-top: .75rem; font-size: .875rem; color: var(--grafito); }
 
 /* ---------- Pie ---------- */
 .pie {
@@ -264,4 +331,12 @@ a:hover { color: var(--azul-2); }
     gap: 3rem;
   }
   .cajetin { width: 24rem; }
+
+  .solicitar {
+    max-width: 38rem;
+    margin-inline: 0;
+    padding: 2rem;
+    border: 2px solid var(--tinta);
+  }
+  .boton--ancho { width: auto; }
 }
