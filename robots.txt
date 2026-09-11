@@ -1,0 +1,5 @@
+# Todo el sitio es público, incluidos buscadores y rastreadores de IA.
+User-agent: *
+Allow: /
+
+Sitemap: https://cristobalurbina.cl/sitemap.xml
