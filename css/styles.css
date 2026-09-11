@@ -1,37 +1,44 @@
 /* ==========================================================
-   cristobalurbina.com — estilos base (mobile-first)
-   Concepto: la hoja de un plano de ingeniería. Blanco, tinta,
-   un solo azul de plano. Lo memorable es el cajetín; todo lo
-   demás se mantiene quieto.
+   cristobalurbina.cl — estilos (mobile-first)
+   Concepto: la hoja de un plano de ingeniería.
+   Escala: la de reparacionesurbina.cl — pantallas completas,
+   titulares enormes y apretados frente a un cuerpo tranquilo.
    ========================================================== */
 
 :root {
   /* Color */
-  --blanco:  #ffffff;   /* hoja */
-  --plano:   #f1f4f3;   /* bandas alternas, gris frío muy suave */
-  --tinta:   #16202b;   /* texto y trazos principales */
-  --grafito: #56606b;   /* texto secundario */
-  --linea:   #cdd3d8;   /* divisiones finas */
-  --azul:    #1d4f7a;   /* acento: tinta azul de plano */
-  --azul-2:  #163d5f;   /* acento presionado */
+  --blanco:  #ffffff;
+  --plano:   #f1f4f3;
+  --tinta:   #16202b;
+  --grafito: #56606b;
+  --linea:   #cdd3d8;
+  --azul:    #1d4f7a;
+  --azul-2:  #163d5f;
 
   /* Tipografía */
   --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
+  /* Escala (equivalente a reparacionesurbina.cl) */
+  --t-nombre: clamp(4rem, 14vw, 7.5rem);    /* 64 → 120 px */
+  --t-titulo: clamp(2.5rem, 8vw, 4.5rem);   /* 40 → 72 px */
+  --t-entrada: clamp(1.1875rem, 2.4vw, 1.5rem);
+
   /* Medidas */
   --ancho: 68rem;
-  --margen: 1.25rem;
+  --margen: 1.5rem;                         /* 24 px */
   --alto-cabecera: 3.5rem;
+  --pausa: 5rem;                            /* 80 px entre bloques */
   --trazo: 1.5px;
 }
 
 /* ---------- Reset mínimo ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-body, h1, h2, h3, p, ul { margin: 0; }
+body, h1, h2, h3, p, ul, fieldset { margin: 0; }
 ul { padding: 0; list-style: none; }
 img { max-width: 100%; display: block; }
+[hidden] { display: none !important; }
 
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
@@ -40,7 +47,7 @@ img { max-width: 100%; display: block; }
 /* ---------- Base ---------- */
 body {
   font-family: var(--sans);
-  font-size: 1.0625rem;          /* 17px */
+  font-size: 1rem;
   line-height: 1.6;
   color: var(--tinta);
   background: var(--blanco);
@@ -49,22 +56,23 @@ body {
 h1, h2, h3 {
   font-family: var(--serif);
   font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
-h1 { font-size: clamp(2.125rem, 7vw, 3.5rem); max-width: 16ch; }
-h2 { font-size: clamp(1.75rem, 4.5vw, 2.375rem); margin-bottom: 1rem; }
-h3 { font-size: 1.375rem; margin-bottom: .75rem; }
+h1 { font-size: var(--t-nombre); line-height: .92; }
+h2 { font-size: var(--t-titulo); line-height: 1; margin-bottom: 1.5rem; max-width: 14ch; }
 
-p { max-width: 62ch; }
+p { max-width: 60ch; }
+p + p { margin-top: 1rem; }
+
+.entrada {
+  font-size: var(--t-entrada);
+  line-height: 1.4;
+  max-width: 32ch;
+}
 
 a { color: var(--azul); text-underline-offset: .18em; }
 a:hover { color: var(--azul-2); }
-
-:focus-visible {
-  outline: 2px solid var(--azul);
-  outline-offset: 3px;
-}
+:focus-visible { outline: 2px solid var(--azul); outline-offset: 3px; }
 
 .contenedor {
   width: 100%;
@@ -74,239 +82,147 @@ a:hover { color: var(--azul-2); }
 }
 
 .saltar {
-  position: absolute;
-  left: var(--margen);
-  top: -3rem;
-  background: var(--tinta);
-  color: var(--blanco);
-  padding: .5rem .75rem;
-  z-index: 100;
+  position: absolute; left: var(--margen); top: -3rem; z-index: 100;
+  background: var(--tinta); color: var(--blanco); padding: .5rem .75rem;
 }
 .saltar:focus { top: .5rem; }
 
 /* ---------- Cabecera y menú ---------- */
 .cabecera {
-  position: sticky;
-  top: 0;
-  z-index: 50;
+  position: sticky; top: 0; z-index: 50;
   background: var(--blanco);
   border-bottom: 1px solid var(--linea);
 }
 .cabecera__fila {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  min-height: var(--alto-cabecera);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; min-height: var(--alto-cabecera);
 }
-
 .marca {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 1.1875rem;
-  color: var(--tinta);
-  text-decoration: none;
+  font-family: var(--serif); font-weight: 600; font-size: 1.1875rem;
+  color: var(--tinta); text-decoration: none;
 }
 
-.menu-boton { display: none; }   /* solo aparece si hay JS */
-
-.menu ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .25rem 1rem;
-  padding-bottom: .5rem;
-}
-.menu a {
-  display: block;
-  padding: .5rem 0;
-  color: var(--tinta);
-  text-decoration: none;
-}
+.menu-boton { display: none; }
+.menu ul { display: flex; flex-wrap: wrap; gap: .25rem 1rem; padding-bottom: .5rem; }
+.menu a { display: block; padding: .5rem 0; color: var(--tinta); text-decoration: none; }
 .menu a[aria-current] { color: var(--azul); text-decoration: underline; text-decoration-thickness: 2px; }
 
-/* Con JS: menú plegable en móvil */
 .js .menu-boton {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-  padding: 0 .875rem;
-  font: inherit;
-  font-size: .9375rem;
-  color: var(--tinta);
-  background: none;
-  border: 1px solid var(--linea);
-  border-radius: 2px;
-  cursor: pointer;
+  display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 .875rem;
+  font: inherit; font-size: .9375rem; color: var(--tinta);
+  background: none; border: 1px solid var(--linea); border-radius: 2px; cursor: pointer;
 }
 .js .menu-boton[aria-expanded="true"] { border-color: var(--tinta); }
 .js .menu { display: none; width: 100%; }
 .js .menu.abierto { display: block; }
-.js .menu ul {
-  flex-direction: column;
-  gap: 0;
-  padding-bottom: .75rem;
-}
+.js .menu ul { flex-direction: column; gap: 0; padding-bottom: .75rem; }
 .js .menu li + li { border-top: 1px solid var(--linea); }
 .js .menu a { padding: .75rem 0; }
 
-/* ---------- Secciones ---------- */
-.seccion {
-  padding-block: 3.5rem;
+/* ---------- Pantallas ---------- */
+.pantalla {
+  min-height: calc(100svh - var(--alto-cabecera));
+  display: flex;
+  align-items: center;
+  padding-block: var(--pausa);
   scroll-margin-top: var(--alto-cabecera);
 }
-.seccion--plano { background: var(--plano); }
+.pantalla--plano { background: var(--plano); }
 
-/* ---------- Portada ---------- */
-.portada { padding-block: 2.5rem 3.5rem; }
-.portada__rejilla {
-  display: grid;
-  gap: 2.5rem;
+.dos-columnas { display: grid; gap: 3rem; align-items: center; }
+
+/* ---------- 1 · Portada ---------- */
+.portada {
+  align-items: flex-end;            /* contenido apoyado abajo */
+  padding-block: 2rem 3.5rem;
 }
-.bajada {
-  margin-top: 1rem;
-  font-size: 1.1875rem;
-  color: var(--grafito);
-  max-width: 38ch;
-}
+.portada__rejilla { display: grid; gap: 2rem; }
+.portada__foto { aspect-ratio: 4 / 3; }
+.portada h1 { margin-bottom: 1.75rem; }
 
 .boton {
-  display: inline-flex;
-  align-items: center;
-  min-height: 3rem;
-  margin-top: 1.75rem;
-  padding: 0 1.375rem;
-  background: var(--azul);
-  color: var(--blanco);
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 2px;
+  display: inline-flex; align-items: center; min-height: 3rem;
+  margin-top: 1.75rem; padding: 0 1.375rem;
+  background: var(--azul); color: var(--blanco);
+  font-weight: 600; text-decoration: none; border-radius: 2px;
 }
 .boton:hover { background: var(--azul-2); color: var(--blanco); }
 
-/* ---------- Cajetín (rótulo de plano) ----------
-   Rejilla con celdas separadas por trazos de tinta:
-   ┌───────────────────────────┐
-   │ Cristóbal Urbina          │
-   ├───────────────────────────┤
-   │ Soluciones y conectividad │
-   ├─────────────┬─────────────┤
-   │ Ing. Mec.   │ Santiago    │
-   └─────────────┴─────────────┘                        */
+/* Cajetín: rótulo de plano. El gap de la rejilla dibuja las líneas. */
 .cajetin {
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 1fr auto;
   gap: var(--trazo);
-  background: var(--tinta);          /* el gap dibuja las líneas */
+  background: var(--tinta);
   border: 2px solid var(--tinta);
   max-width: 26rem;
 }
-.cajetin p {
-  margin: 0;
-  padding: .75rem 1rem;
-  background: var(--blanco);
-  max-width: none;
-}
-.cajetin .cajetin__nombre {
-  grid-column: 1 / -1;
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 1.2;
-  padding-block: 1rem;
-}
-.cajetin .cajetin__area {
-  grid-column: 1 / -1;
-  font-size: 1rem;
-}
+.cajetin p { margin: 0; padding: .75rem 1rem; background: var(--blanco); max-width: none; }
+.cajetin .cajetin__area { grid-column: 1 / -1; font-family: var(--serif); font-weight: 600; font-size: 1.25rem; }
 .cajetin .cajetin__titulo,
-.cajetin .cajetin__lugar {
-  font-size: .875rem;
-  color: var(--grafito);
-}
+.cajetin .cajetin__lugar { font-size: .875rem; color: var(--grafito); }
 
-/* ---------- Marcadores de tareas pendientes (se borran al completar) ---------- */
+/* ---------- Bloques visuales pendientes (se reemplazan en cada tarea) ---------- */
 .pendiente {
-  padding: 1rem;
-  border: 1px dashed var(--linea);
-  color: var(--grafito);
-  font-size: .9375rem;
+  display: grid; place-items: center;
+  padding: 1rem; border: 1px dashed var(--grafito);
+  color: var(--grafito); font-size: .9375rem; text-align: center;
 }
-/* ---------- Solicitud por WhatsApp ---------- */
+.carrusel { min-height: 20rem; }
+.union, .receptores { min-height: 16rem; margin-top: 2.5rem; }
+
+/* ---------- 5 · Solicitud por WhatsApp ---------- */
 .solicitar {
-  margin-top: 2.5rem;
   padding: 1.5rem var(--margen);
-  margin-inline: calc(var(--margen) * -1);   /* en móvil ocupa todo el ancho */
+  margin-inline: calc(var(--margen) * -1);
   background: var(--blanco);
   border-block: 2px solid var(--tinta);
 }
-.solicitar > p { color: var(--grafito); }
 
-.opciones {
-  margin: 1.5rem 0 0;
-  padding: 0;
-  border: 0;
-}
-.opciones legend {
-  padding: 0;
-  margin-bottom: .5rem;
-  font-weight: 600;
-}
+.opciones, .subopciones { padding: 0; border: 0; min-width: 0; }
+.opciones legend, .subopciones legend { padding: 0; margin-bottom: .5rem; font-weight: 600; }
+
 .opcion {
-  display: flex;
-  align-items: center;
-  gap: .875rem;
-  min-height: 3.25rem;
-  padding: .5rem 0;
-  border-top: 1px solid var(--linea);
-  cursor: pointer;
+  display: flex; align-items: center; gap: .875rem;
+  min-height: 3.25rem; padding: .5rem 0;
+  border-top: 1px solid var(--linea); cursor: pointer;
 }
-.opcion:last-of-type { border-bottom: 1px solid var(--linea); }
+.opciones > .opcion:last-of-type { border-bottom: 1px solid var(--linea); }
 .opcion input {
-  width: 1.375rem;
-  height: 1.375rem;
-  margin: 0;
-  flex: none;
+  width: 1.375rem; height: 1.375rem; margin: 0; flex: none;
   accent-color: var(--azul);
 }
+.detalle { color: var(--grafito); font-size: .875rem; }
+
+/* Submenú de receptores: sangrado y con línea azul, colgando del padre */
+.subopciones {
+  margin: 0 0 0 .625rem;
+  padding: .75rem 0 .25rem 1.5rem;
+  border-left: 2px solid var(--azul);
+  border-bottom: 1px solid var(--linea);
+}
+.subopciones legend { float: left; width: 100%; font-size: .9375rem; color: var(--grafito); font-weight: 400; }
+.subopciones .opcion { clear: both; }
 
 .campo { margin-top: 1.5rem; }
 .campo label { display: block; font-weight: 600; margin-bottom: .5rem; }
 .opcional { font-weight: 400; color: var(--grafito); }
 .campo input {
-  font: inherit;
-  min-height: 3rem;
-  min-width: 10rem;
-  padding: 0 .75rem;
-  color: var(--tinta);
-  background: var(--blanco);
-  border: 1px solid var(--grafito);
-  border-radius: 2px;
+  font: inherit; min-height: 3rem; min-width: 10rem; padding: 0 .75rem;
+  color: var(--tinta); background: var(--blanco);
+  border: 1px solid var(--grafito); border-radius: 2px;
 }
 
-.mensaje {
-  margin-top: 1.75rem;
-  padding: 1rem;
-  background: var(--plano);
-  border-left: 3px solid var(--azul);
-}
+.mensaje { margin-top: 1.75rem; padding: 1rem; background: var(--plano); border-left: 3px solid var(--azul); }
 .mensaje__titulo { font-size: .875rem; color: var(--grafito); }
-.mensaje__texto { margin-top: .25rem; }
+.mensaje__texto { margin-top: .25rem !important; }
 
 .boton--ancho { width: 100%; justify-content: center; text-align: center; }
-.boton[aria-disabled="true"] {
-  background: var(--linea);
-  color: var(--grafito);
-  cursor: not-allowed;
-}
+.boton[aria-disabled="true"] { background: var(--linea); color: var(--grafito); cursor: not-allowed; }
 .nota { margin-top: .75rem; font-size: .875rem; color: var(--grafito); }
 
 /* ---------- Pie ---------- */
-.pie {
-  padding-block: 2rem;
-  border-top: 1px solid var(--linea);
-  font-size: .875rem;
-  color: var(--grafito);
-}
+.pie { padding-block: 2rem; border-top: 1px solid var(--linea); font-size: .875rem; color: var(--grafito); }
 
 /* ==========================================================
    Escritorio (≥ 48rem / 768px)
@@ -321,22 +237,14 @@ a:hover { color: var(--azul-2); }
   .js .menu li + li { border-top: 0; }
   .menu a, .js .menu a { padding: .5rem 0; }
 
-  .seccion { padding-block: 5rem; }
-  .portada { padding-block: 5rem; }
+  .portada { padding-block: 3rem 5rem; }
+  .portada__rejilla { grid-template-columns: 5fr 6fr; gap: 3.5rem; align-items: end; }
+  .portada__foto { aspect-ratio: 3 / 4; }
 
-  /* El cajetín va abajo a la derecha, como en un plano */
-  .portada__rejilla {
-    grid-template-columns: 1fr auto;
-    align-items: end;
-    gap: 3rem;
-  }
-  .cajetin { width: 24rem; }
+  .dos-columnas { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .dos-columnas--arriba { align-items: start; }
+  .carrusel { order: -1; }   /* carrusel a la izquierda, texto a la derecha */
 
-  .solicitar {
-    max-width: 38rem;
-    margin-inline: 0;
-    padding: 2rem;
-    border: 2px solid var(--tinta);
-  }
+  .solicitar { margin-inline: 0; padding: 2rem; border: 2px solid var(--tinta); }
   .boton--ancho { width: auto; }
 }

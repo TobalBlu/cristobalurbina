@@ -5,6 +5,9 @@
   var NUMERO = '56963725631';
 
   var casillas = document.querySelectorAll('input[name="servicio"]');
+  var tipos = document.querySelectorAll('input[name="tipo"]');
+  var receptores = document.getElementById('receptores');
+  var panelTipos = document.getElementById('tipos-receptor');
   var hora = document.getElementById('hora');
   var vista = document.getElementById('vista-previa');
   var boton = document.getElementById('enviar-wsp');
@@ -18,21 +21,34 @@
 
   function armarMensaje() {
     var elegidos = [];
-    casillas.forEach(function (c) { if (c.checked) elegidos.push(c.value); });
+    casillas.forEach(function (c) {
+      if (!c.checked) return;
+      var texto = c.value;
+      if (c === receptores) {
+        var t = [];
+        tipos.forEach(function (x) { if (x.checked) t.push(x.value); });
+        if (t.length) texto += ' (' + unir(t) + ')';   // receptores de reseñas (NFC y QR)
+      }
+      elegidos.push(texto);
+    });
     if (!elegidos.length) return null;
 
-    var texto = 'Hola, estoy interesado en ' + unir(elegidos) + '. ';
+    var mensaje = 'Hola, estoy interesado en ' + unir(elegidos) + '. ';
     if (hora.value) {
-      // 01:xx se dice "a la 1"; el resto, "a las"
       var articulo = hora.value.indexOf('01:') === 0 ? 'a la ' : 'a las ';
-      texto += 'Me gustaría que me devolvieras un llamado ' + articulo + hora.value + '.';
+      mensaje += 'Me gustaría que me devolvieras un llamado ' + articulo + hora.value + '.';
     } else {
-      texto += 'Me gustaría que me devolvieras un llamado cuando puedas.';
+      mensaje += 'Me gustaría que me devolvieras un llamado cuando puedas.';
     }
-    return texto;
+    return mensaje;
   }
 
   function actualizar() {
+    // El menú de tipos solo aparece con "Receptores de reseñas" marcado
+    panelTipos.hidden = !receptores.checked;
+    receptores.setAttribute('aria-expanded', String(receptores.checked));
+    if (!receptores.checked) tipos.forEach(function (x) { x.checked = false; });
+
     var texto = armarMensaje();
     if (texto) {
       vista.textContent = texto;
@@ -45,7 +61,6 @@
     }
   }
 
-  // Sin servicios marcados, el botón no abre WhatsApp y señala qué falta
   boton.addEventListener('click', function (e) {
     if (boton.getAttribute('aria-disabled') === 'true') {
       e.preventDefault();
@@ -54,6 +69,7 @@
   });
 
   casillas.forEach(function (c) { c.addEventListener('change', actualizar); });
+  tipos.forEach(function (c) { c.addEventListener('change', actualizar); });
   hora.addEventListener('input', actualizar);
   actualizar();
 })();
