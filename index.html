@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cristóbal Urbina | Páginas web, Google Business y reseñas para negocios locales</title>
-  <meta name="description" content="Páginas web, perfil de Google Business y receptores de reseñas QR/NFC para que los clientes encuentren tu negocio. Cristóbal Urbina, Ingeniero Mecánico, USACH. Santiago, Chile.">
+  <title>Cristóbal Urbina | Posicionamiento web para negocios locales</title>
+  <meta name="description" content="Posicionamiento web para negocios locales: páginas web, perfil de Google Business y receptores de reseñas QR/NFC. Cristóbal Urbina, Ingeniero Mecánico, USACH. Santiago, Chile.">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="https://cristobalurbina.cl/">
   <script>document.documentElement.classList.add('js')</script>
@@ -38,18 +38,18 @@
 
     <!-- 1 · IDENTIDAD ======================================== -->
     <section id="inicio" class="pantalla portada">
-      <div class="contenedor portada__rejilla">
-        <!-- Foto: pantalla 3 del plan. Reemplazar este bloque por <img> -->
-        <div class="portada__foto pendiente">Foto</div>
+      <div class="contenedor">
+        <h1>Cristóbal<br>Urbina</h1>
+        <p class="funcion">Posicionamiento web para negocios locales.</p>
 
-        <div class="portada__texto">
-          <h1>Cristóbal<br>Urbina</h1>
-          <div class="cajetin" role="group" aria-label="Datos del profesional">
-            <p class="cajetin__area">Asesorías e Ingeniería</p>
-            <p class="cajetin__titulo">Ingeniero Mecánico, USACH</p>
-            <p class="cajetin__lugar">Santiago, Chile</p>
-          </div>
-        </div>
+        <dl class="ficha">
+          <div><dt>Servicio</dt><dd>Asesorías e Ingeniería</dd></div>
+          <div><dt>Título</dt><dd>Ingeniero Mecánico, USACH</dd></div>
+          <div><dt>Lugar</dt><dd>Santiago, Chile</dd></div>
+        </dl>
+
+        <!-- Imagen opcional: si img/header.jpg no existe, no ocupa espacio -->
+        <img class="foto foto--portada" src="img/header.jpg" alt="" width="1200" height="900" loading="lazy" data-opcional>
       </div>
     </section>
 
@@ -62,40 +62,73 @@
           <p>Una página web y un perfil de Google Business permiten que las personas encuentren tu negocio.</p>
         </div>
 
-        <!-- Carrusel de ejemplos: pantalla 4 del plan. En escritorio va a la izquierda. -->
-        <div class="carrusel pendiente">Carrusel de páginas</div>
+        <!-- Carrusel: cada imagen que falte simplemente no aparece.
+             Para sumar un ejemplo, copia un bloque <li> y cambia el archivo y el nombre. -->
+        <ul class="carrusel" aria-label="Ejemplos de páginas web">
+          <li><img class="foto" src="img/pagina1.jpg" alt="Página web de ejemplo" width="800" height="1400" loading="lazy" data-opcional></li>
+          <li><img class="foto" src="img/pagina2.jpg" alt="Página web de ejemplo" width="800" height="1400" loading="lazy" data-opcional></li>
+        </ul>
       </div>
     </section>
 
     <!-- 3 · PÁGINA + GOOGLE BUSINESS ========================= -->
     <section id="google-business" class="pantalla" aria-labelledby="t-gb">
-      <div class="contenedor">
-        <h2 id="t-gb">Tu página y tu Google Business, juntos</h2>
-        <p class="entrada">Las reseñas de Google le dan visibilidad a tu página, y mostrarlas en tu página le da más confianza a tus clientes.</p>
-        <!-- Unión página ↔ ficha de Google: pantalla 5 del plan -->
-        <div class="union pendiente">Página web + ficha de Google</div>
+      <div class="contenedor dos-columnas">
+        <div>
+          <h2 id="t-gb">Tu página y tu Google&nbsp;Business, juntos</h2>
+          <p class="entrada">Las reseñas de Google le dan visibilidad a tu página.</p>
+          <p class="entrada">Mostrarlas en tu página le da más confianza a tus clientes.</p>
+        </div>
+
+        <div class="muestra-resenas">
+          <p class="muestra-resenas__marca">
+            <span class="muestra-resenas__nota">5,0</span>
+            <span class="estrellas" role="img" aria-label="5 de 5 estrellas">★★★★★</span>
+            <span class="muestra-resenas__fuente">Reseñas en Google</span>
+          </p>
+
+          <!-- Reseñas reales: reemplazar el texto y el nombre por los de tu ficha -->
+          <blockquote class="resena">
+            <p class="estrellas" role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+            <p>Aquí va una reseña real de tu ficha de Google.</p>
+            <footer>Nombre del cliente</footer>
+          </blockquote>
+          <blockquote class="resena">
+            <p class="estrellas" role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+            <p>Aquí va otra reseña real de tu ficha de Google.</p>
+            <footer>Nombre del cliente</footer>
+          </blockquote>
+
+          <img class="foto" src="img/resenaweb.jpg" alt="Reseñas de Google mostradas dentro de una página web" width="1200" height="800" loading="lazy" data-opcional>
+        </div>
       </div>
     </section>
 
     <!-- 4 · RECEPTORES DE RESEÑAS ============================ -->
     <section id="resenas" class="pantalla pantalla--plano" aria-labelledby="t-resenas">
-      <div class="contenedor">
-        <h2 id="t-resenas">Receptores de reseñas</h2>
-        <p class="entrada">Cualquiera puede pagar para aparecer en Google. Salir potenciado por las recomendaciones de tus clientes es diferenciador.</p>
-        <p>Facilítale el camino a tus clientes con QR y NFC en receptores, tarjetas o stickers. Cada reseña suma visibilidad a tu negocio en Google.</p>
-
-        <!-- Demostración: el mismo mecanismo, apuntando a tu propia ficha -->
-        <div class="demo-resena">
-          <img class="demo-resena__qr" src="img/qr-resena.svg" width="160" height="160" alt="Código QR para dejar una reseña de Cristóbal Urbina en Google">
-          <div>
-            <p class="demo-resena__titulo">Así funciona</p>
-            <p>Escanea el código con tu celular, o toca el botón si ya estás en él, y llegas directo a dejarme una reseña. Es lo mismo que vivirán tus clientes con un receptor.</p>
-            <a class="boton boton--claro" href="https://g.page/r/CSdmmgslL0hoEBI/review" target="_blank" rel="noopener">Dejar una reseña</a>
-          </div>
+      <div class="contenedor dos-columnas">
+        <div>
+          <h2 id="t-resenas">Receptores de reseñas</h2>
+          <p class="entrada">Cualquiera puede pagar para aparecer en Google.</p>
+          <p class="entrada">Salir potenciado por las recomendaciones de tus clientes es diferenciador.</p>
+          <p>Facilítale el camino a tus clientes con QR y NFC en receptores, tarjetas o stickers.</p>
+          <p>Cada reseña suma visibilidad a tu negocio en Google.</p>
         </div>
 
-        <!-- Fotos de receptores: pantalla 6 del plan -->
-        <div class="receptores pendiente">Receptores NFC y QR</div>
+        <div>
+          <img class="foto" src="img/receptores.jpg" alt="Receptores de reseñas, tarjetas y stickers con QR" width="1200" height="900" loading="lazy" data-opcional>
+
+          <!-- Demostración: el mismo mecanismo, apuntando a tu propia ficha -->
+          <div class="demo-resena">
+            <img class="demo-resena__qr" src="img/qr-resena.svg" width="160" height="160" alt="Código QR para dejar una reseña de Cristóbal Urbina en Google">
+            <div>
+              <p class="demo-resena__titulo">Así funciona</p>
+              <p>Escanea el código con tu celular, o toca el botón si ya estás en él.</p>
+              <p>Llegas directo a dejar una reseña, igual que tus clientes con un receptor.</p>
+              <a class="boton boton--claro" href="https://g.page/r/CSdmmgslL0hoEBI/review" target="_blank" rel="noopener">Dejar una reseña</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -154,7 +187,7 @@
 
   <footer class="pie">
     <div class="contenedor">
-      <p>© 2026 Cristóbal Urbina</p>
+      <p>© 2026 Cristóbal Urbina · Santiago, Chile</p>
     </div>
   </footer>
 </body>

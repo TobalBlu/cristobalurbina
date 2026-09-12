@@ -36,3 +36,17 @@
 
   document.querySelectorAll('main section[id]').forEach(function (s) { observador.observe(s); });
 })();
+
+// Imágenes opcionales: si el archivo no existe todavía, se quitan del
+// documento para que no reserven espacio ni muestren un ícono roto.
+(function () {
+  function quitar(img) {
+    var li = img.closest('li');
+    (li || img).remove();
+  }
+  document.querySelectorAll('img[data-opcional]').forEach(function (img) {
+    img.addEventListener('error', function () { quitar(img); });
+    // Si ya falló antes de que corriera este script
+    if (img.complete && img.naturalWidth === 0) quitar(img);
+  });
+})();

@@ -136,9 +136,11 @@ a:hover { color: var(--azul-2); }
   align-items: flex-end;            /* contenido apoyado abajo */
   padding-block: 2rem 3.5rem;
 }
-.portada__rejilla { display: grid; gap: 2rem; }
-.portada__foto { aspect-ratio: 4 / 3; }
-.portada h1 { margin-bottom: 1.75rem; }
+.portada h1 { margin-bottom: 1.25rem; }
+.funcion {
+  font-size: var(--t-entrada); line-height: 1.35;
+  max-width: 20ch; color: var(--tinta);
+}
 
 .boton {
   display: inline-flex; align-items: center; min-height: 3rem;
@@ -149,48 +151,75 @@ a:hover { color: var(--azul-2); }
 }
 .boton:hover { background: var(--azul-2); color: var(--blanco); }
 
-/* Cajetín: rótulo de plano. El gap de la rejilla dibuja las líneas. */
-.cajetin {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--trazo);
-  background: var(--tinta);
-  border: 2px solid var(--tinta);
-  max-width: 26rem;
+/* Ficha: el orden del cajetín, sin las líneas.
+   Etiqueta chica arriba, dato abajo. */
+.ficha { display: grid; gap: 1.25rem; margin-top: 2rem; max-width: 34rem; }
+.ficha div { border-top: 1px solid var(--linea); padding-top: .625rem; }
+.ficha dt {
+  font-size: .6875rem; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--grafito); margin-bottom: .125rem;
 }
-.cajetin p { margin: 0; padding: .75rem 1rem; background: var(--blanco); max-width: none; }
-.cajetin .cajetin__area { grid-column: 1 / -1; font-family: var(--serif); font-weight: 600; font-size: 1.25rem; }
-.cajetin .cajetin__titulo,
-.cajetin .cajetin__lugar { font-size: .875rem; color: var(--grafito); }
+.ficha dd { margin: 0; }
+
+/* ---------- Imágenes opcionales ----------
+   Sin archivo, el JS las quita y no reservan espacio. */
+.foto { width: 100%; height: auto; }
+.foto--portada { margin-top: 2.5rem; max-width: 30rem; }
 
 /* ---------- 4 · Demostración de reseña ---------- */
 .demo-resena {
   display: grid; gap: 1.25rem; align-items: center;
-  margin-top: 2.5rem; padding: 1.5rem;
+  margin-top: 2rem; padding: 1.5rem;
   background: var(--blanco);
-  border: 2px solid var(--tinta);
+  border-left: 3px solid var(--azul);
   max-width: 44rem;
 }
 .demo-resena__qr { width: 9rem; height: 9rem; }
-.demo-resena__titulo { font-family: var(--serif); font-weight: 600; font-size: 1.375rem; margin-bottom: .25rem; }
+.demo-resena__titulo { font-family: var(--serif); font-weight: 600; font-size: 1.375rem; margin-bottom: .5rem; }
+.demo-resena p + p { margin-top: .5rem; }
 .boton--claro { background: var(--blanco); color: var(--azul); border: 2px solid var(--azul); }
 .boton--claro:hover { background: var(--azul); color: var(--blanco); }
 
-/* ---------- Bloques visuales pendientes (se reemplazan en cada tarea) ---------- */
-.pendiente {
-  display: grid; place-items: center;
-  padding: 1rem; border: 1px dashed var(--grafito);
-  color: var(--grafito); font-size: .9375rem; text-align: center;
+/* ---------- 2 · Carrusel de ejemplos ---------- */
+.carrusel {
+  display: flex; gap: 1rem; margin: 0; padding: 0 0 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
-.carrusel { min-height: 20rem; }
-.union, .receptores { min-height: 16rem; margin-top: 2.5rem; }
+.carrusel:empty { display: none; }
+.carrusel li { flex: 0 0 min(62%, 15rem); scroll-snap-align: start; }
+.carrusel .foto { border: 1px solid var(--linea); }
+
+/* ---------- 3 · Muestra de reseñas ---------- */
+.muestra-resenas__marca {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: .625rem;
+  margin-bottom: 1.25rem; padding-bottom: .875rem;
+  /* Guiño sutil a los colores de Google, sin imitar su logotipo */
+  border-bottom: 3px solid;
+  border-image: linear-gradient(to right, #4285f4 0 25%, #ea4335 25% 50%, #fbbc04 50% 75%, #34a853 75% 100%) 1;
+}
+.muestra-resenas__nota { font-family: var(--serif); font-size: 1.75rem; font-weight: 600; }
+.muestra-resenas__fuente { font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; color: var(--grafito); }
+.estrellas { color: #fbbc04; letter-spacing: .1em; font-size: 1.25rem; }
+
+.resena { margin: 0 0 1rem; padding: 1rem 1.25rem; background: var(--plano); }
+.resena .estrellas { font-size: .9375rem; }
+.resena p + p { margin-top: .5rem; }
+.resena footer {
+  margin-top: .625rem; font-size: .8125rem;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--grafito);
+}
+.muestra-resenas .foto { margin-top: 1.5rem; }
 
 /* ---------- 5 · Solicitud por WhatsApp ---------- */
 .solicitar {
   padding: 1.5rem var(--margen);
   margin-inline: calc(var(--margen) * -1);
   background: var(--blanco);
-  border-block: 2px solid var(--tinta);
+  border-block: 1px solid var(--linea);
 }
 
 .opciones, .subopciones { padding: 0; border: 0; min-width: 0; }
@@ -269,14 +298,14 @@ a:hover { color: var(--azul-2); }
   .menu a, .js .menu a { padding: .5rem 0; }
 
   .portada { padding-block: 3rem 5rem; }
-  .portada__rejilla { grid-template-columns: 5fr 6fr; gap: 3.5rem; align-items: end; }
-  .portada__foto { aspect-ratio: 3 / 4; }
 
   .dos-columnas { grid-template-columns: 1fr 1fr; gap: 4rem; }
   .dos-columnas--arriba { align-items: start; }
   .carrusel { order: -1; }   /* carrusel a la izquierda, texto a la derecha */
+  .carrusel li { flex-basis: 11rem; }
+  .ficha { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
 
-  .solicitar { margin-inline: 0; padding: 2rem; border: 2px solid var(--tinta); }
+  .solicitar { margin-inline: 0; padding: 2rem; border: 1px solid var(--linea); }
   .boton--ancho { width: auto; }
   .demo-resena { grid-template-columns: auto 1fr; gap: 2rem; }
 }

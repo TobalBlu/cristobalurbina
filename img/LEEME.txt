@@ -1,0 +1,21 @@
+IMÁGENES DEL SITIO
+==================
+
+Sube aquí los archivos con estos nombres exactos, todo en minúsculas.
+Si un archivo no existe, el sitio simplemente no muestra nada en su lugar:
+no queda un hueco ni un ícono roto. Puedes subirlos de a uno.
+
+  header.jpg      Foto de la portada (opcional; hoy la portada funciona sin ella)
+  pagina1.jpg     Captura de una página web que hiciste
+  pagina2.jpg     Otra captura
+  resenaweb.jpg   Captura de reseñas de Google dentro de una página web
+  receptores.jpg  Foto de receptores, tarjetas y stickers con QR
+
+Para sumar más ejemplos al carrusel (pagina3.jpg, pagina4.jpg...), copia en
+index.html una línea <li>...</li> dentro de <ul class="carrusel"> y cambia
+el nombre del archivo.
+
+Recomendación: exporta a un máximo de 1600 px de ancho y menos de 300 KB por
+imagen, para que la página cargue rápido en datos móviles.
+
+qr-resena.svg lo genero yo: es el código que lleva a tu ficha de reseñas.
