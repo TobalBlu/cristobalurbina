@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PYAAR — Agua purificada a domicilio en Maipú</title>
 <meta name="description" content="Agua purificada a domicilio en Maipú. Pide tu recarga por WhatsApp y te llega a la puerta.">
+<!-- DEMO: mientras viva en cristobalurbina.cl/demos/ no se indexa.
+     Cuando el cliente apruebe y pase a su propio dominio, BORRAR esta línea. -->
+<meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0C3B5C">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3C11 10 7 14.6 7 19a9 9 0 0 0 18 0c0-4.4-4-9-9-16z' fill='%231B8FD1'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,7 +57,43 @@
       <div class="tarjeta" id="pedido">
         <h2 class="tarjeta__titulo">Haz tu pedido</h2>
         <div class="tarjeta__cuerpo" id="formulario-pedido">
-          <p class="pendiente">Acá va el formulario de pedido (paso 2).</p>
+
+          <div class="campo">
+            <p class="campo__titulo" id="lbl-cantidad">¿Cuántas recargas necesitas?</p>
+            <div class="contador" role="group" aria-labelledby="lbl-cantidad">
+              <button type="button" class="contador__btn" id="menos" aria-label="Quitar una recarga">&minus;</button>
+              <span class="contador__valor" id="cantidad-valor" aria-live="polite">2</span>
+              <button type="button" class="contador__btn" id="mas" aria-label="Agregar una recarga">+</button>
+            </div>
+            <p class="campo__ayuda" id="ayuda-cantidad"></p>
+          </div>
+
+          <div class="campo" id="campo-bidon" hidden>
+            <label class="opcion">
+              <input type="checkbox" id="necesita-bidon">
+              <span class="opcion__texto">
+                <strong>No tengo bidón para intercambiar</strong>
+                <small id="ayuda-bidon"></small>
+              </span>
+            </label>
+          </div>
+
+          <div class="resumen">
+            <div class="resumen__linea" id="linea-recargas">
+              <span id="detalle-recargas"></span>
+              <span id="monto-recargas"></span>
+            </div>
+            <div class="resumen__linea" id="linea-bidones" hidden>
+              <span id="detalle-bidones"></span>
+              <span id="monto-bidones"></span>
+            </div>
+            <div class="resumen__total">
+              <span>Total</span>
+              <strong id="total"></strong>
+            </div>
+          </div>
+
+          <p class="pendiente">Dirección y horario de entrega (paso 3).</p>
         </div>
       </div>
 

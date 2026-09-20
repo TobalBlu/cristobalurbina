@@ -23,6 +23,9 @@ const CONFIG = {
   /* Pedido mínimo en recargas. 1 = sin mínimo. */
   MINIMO_RECARGAS: 2,
 
+  /* Tope por pedido, para que nadie mande "99 recargas" sin hablar antes. */
+  MAXIMO_RECARGAS: 20,
+
   /* --- Cobertura -------------------------------------- */
   COBERTURA: "Maipú",
   COBERTURA_DETALLE: "Entregamos en toda la comuna de Maipú.",

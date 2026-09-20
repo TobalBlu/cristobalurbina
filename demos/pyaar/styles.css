@@ -175,12 +175,134 @@ a { color: inherit; }
 }
 
 .pendiente {
-  margin: 18px 0;
-  padding: 26px 18px;
+  margin: 18px 0 0;
+  padding: 20px 18px;
   border: 2px dashed var(--linea);
   border-radius: var(--radio);
   text-align: center;
   color: var(--tinta-suave);
+  font-size: .95rem;
+}
+
+/* ---------- Campos del formulario ---------- */
+
+.campo { margin-top: 20px; }
+
+.campo__titulo {
+  margin: 0 0 10px;
+  font-weight: 600;
+  color: var(--azul-profundo);
+}
+
+.campo__ayuda {
+  margin: 10px 0 0;
+  font-size: .9rem;
+  color: var(--tinta-suave);
+  min-height: 1.2em;
+}
+
+/* Contador de recargas */
+
+.contador {
+  display: grid;
+  grid-template-columns: 58px 1fr 58px;
+  align-items: center;
+  gap: 8px;
+  background: var(--celeste-claro);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: 8px;
+}
+
+.contador__btn {
+  height: 54px;
+  border: 1px solid var(--linea);
+  border-radius: 10px;
+  background: var(--blanco);
+  color: var(--azul-profundo);
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.contador__btn:hover:not(:disabled) { border-color: var(--azul-accion); }
+.contador__btn:active:not(:disabled) { background: var(--celeste-claro); }
+
+.contador__btn:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.contador__valor {
+  text-align: center;
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--azul-profundo);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Casilla del bidón */
+
+.opcion {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  cursor: pointer;
+}
+
+.opcion:has(input:checked) {
+  border-color: var(--azul-accion);
+  background: var(--celeste-claro);
+}
+
+.opcion input {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin: 2px 0 0;
+  accent-color: var(--azul-accion);
+}
+
+.opcion__texto { display: block; }
+.opcion__texto strong { display: block; font-weight: 600; color: var(--azul-profundo); }
+.opcion__texto small { display: block; font-size: .9rem; color: var(--tinta-suave); }
+
+/* Resumen de precios */
+
+.resumen {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--linea);
+}
+
+.resumen__linea {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: .98rem;
+  color: var(--tinta-suave);
+  margin-bottom: 8px;
+}
+
+.resumen__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: 12px;
+  font-weight: 600;
+  color: var(--azul-profundo);
+}
+
+.resumen__total strong {
+  font-size: 1.7rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ---------- Pie ---------- */
