@@ -353,7 +353,7 @@ function textoHorario() {
 function armarMensaje() {
   const { total } = calcularTotal();
   const lineas = [
-    `Hola ${CONFIG.NOMBRE}, quiero ${plural(estadoPedido.recargas, "recarga", "recargas")} de agua (${pesos(total)}).`
+    `Hola! ${CONFIG.NOMBRE}, necesito  ${plural(estadoPedido.recargas, "recarga", "recargas")} de agua (${pesos(total)}).`
   ];
   if (estadoPedido.bidones > 0 && CONFIG.VENDE_BIDON) {
     lineas.push(`Incluye ${plural(estadoPedido.bidones, "bidón nuevo", "bidones nuevos")}: no tengo envase para ${estadoPedido.bidones === 1 ? "ese" : "esos"}.`);
