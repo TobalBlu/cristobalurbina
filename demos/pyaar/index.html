@@ -1,1 +1,77 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PYAAR — Agua purificada a domicilio en Maipú</title>
+<meta name="description" content="Agua purificada a domicilio en Maipú. Pide tu recarga por WhatsApp y te llega a la puerta.">
+<meta name="theme-color" content="#0C3B5C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3C11 10 7 14.6 7 19a9 9 0 0 0 18 0c0-4.4-4-9-9-16z' fill='%231B8FD1'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
+<header class="barra">
+  <div class="contenedor barra__fila">
+    <a class="marca" href="#inicio">
+      <!-- Logo provisorio. Reemplazable por el del cliente: es un solo <svg>. -->
+      <svg class="marca__gota" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path d="M16 2C10.6 9.6 6.2 14.5 6.2 19.3a9.8 9.8 0 0 0 19.6 0C25.8 14.5 21.4 9.6 16 2z"/>
+        <path class="marca__brillo" d="M12.2 18.8a3.8 5.2 0 0 1 2.3-4.8" />
+      </svg>
+      <span class="marca__texto">
+        <strong data-cfg="NOMBRE">PYAAR</strong>
+        <small data-cfg="BAJADA">Agua purificada a domicilio</small>
+      </span>
+    </a>
+    <a class="barra__tel" id="tel-cabecera" href="#pedido">
+      <span>Pedir ahora</span>
+    </a>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <section class="hero">
+    <div class="contenedor hero__grilla">
+
+      <div class="hero__texto">
+        <h1>Tu agua llega a la puerta, sin llamadas ni esperas.</h1>
+        <p class="hero__bajada">
+          Recargas de agua purificada en <span data-cfg="COBERTURA">Maipú</span>.
+          Armas tu pedido acá y se envía por WhatsApp listo para confirmar.
+        </p>
+        <ul class="confianza" id="confianza"></ul>
+        <p class="hero__precio">
+          <strong id="precio-recarga">$2.500</strong> la recarga
+          <span class="hero__minimo" id="texto-minimo"></span>
+        </p>
+      </div>
+
+      <div class="tarjeta" id="pedido">
+        <h2 class="tarjeta__titulo">Haz tu pedido</h2>
+        <div class="tarjeta__cuerpo" id="formulario-pedido">
+          <p class="pendiente">Acá va el formulario de pedido (paso 2).</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor pie__fila">
+    <p class="pie__marca" data-cfg="NOMBRE">PYAAR</p>
+    <p class="pie__cobertura" data-cfg="COBERTURA_DETALLE"></p>
+    <p class="pie__legal">&copy; <span id="anio"></span></p>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

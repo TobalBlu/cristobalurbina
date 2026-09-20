@@ -1,0 +1,225 @@
+/* =========================================================
+   PYAAR — estilos
+   Mobile-first. Los colores y tamaños viven en :root.
+   ========================================================= */
+
+:root {
+  --azul-profundo: #0C3B5C;
+  --azul-accion:   #1B8FD1;
+  --celeste-claro: #E9F4FA;
+  --blanco:        #FFFFFF;
+  --tinta:         #12303F;
+  --tinta-suave:   #55707E;
+  --linea:         #CFE4F0;
+  --whatsapp:      #25D366;
+  --whatsapp-osc:  #1EA952;
+
+  --radio:     14px;
+  --radio-lg:  22px;
+  --ancho:     1120px;
+  --sombra:    0 18px 44px rgba(12, 59, 92, .14);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--tinta);
+  background: var(--blanco);
+}
+
+h1, h2, h3 { margin: 0 0 .5em; line-height: 1.15; color: var(--azul-profundo); }
+p { margin: 0 0 1em; }
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--azul-accion);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+/* ---------- Barra superior ---------- */
+
+.barra {
+  background: var(--blanco);
+  border-bottom: 1px solid var(--linea);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.barra__fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 68px;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.marca__gota { width: 32px; height: 32px; flex: none; fill: var(--azul-accion); }
+.marca__brillo { fill: none; stroke: rgba(255,255,255,.75); stroke-width: 2; stroke-linecap: round; }
+
+.marca__texto { display: flex; flex-direction: column; line-height: 1.1; }
+.marca__texto strong {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  color: var(--azul-profundo);
+}
+.marca__texto small { font-size: .78rem; color: var(--tinta-suave); }
+
+.barra__tel {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--celeste-claro);
+  color: var(--azul-profundo);
+  font-weight: 600;
+  font-size: .95rem;
+  text-decoration: none;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  background:
+    radial-gradient(120% 90% at 12% 0%, #F6FBFE 0%, var(--celeste-claro) 55%, #D9ECF7 100%);
+  padding-block: 38px 46px;
+}
+
+.hero__grilla { display: grid; gap: 28px; }
+
+.hero__texto h1 {
+  font-size: clamp(2rem, 7vw, 2.9rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  max-width: 16ch;
+}
+
+.hero__bajada {
+  font-size: 1.08rem;
+  color: var(--tinta-suave);
+  max-width: 44ch;
+}
+
+.confianza {
+  list-style: none;
+  margin: 22px 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.confianza li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.confianza li::before {
+  content: "";
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: var(--azul-accion) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 15px no-repeat;
+}
+
+.hero__precio {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--azul-profundo);
+}
+.hero__precio strong { font-size: 1.5rem; font-weight: 800; }
+.hero__minimo { display: block; font-size: .92rem; color: var(--tinta-suave); }
+
+/* ---------- Tarjeta de pedido ---------- */
+
+.tarjeta {
+  background: var(--blanco);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra);
+  padding: 22px;
+  scroll-margin-top: 84px;
+}
+
+.tarjeta__titulo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.pendiente {
+  margin: 18px 0;
+  padding: 26px 18px;
+  border: 2px dashed var(--linea);
+  border-radius: var(--radio);
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Pie ---------- */
+
+.pie {
+  background: var(--azul-profundo);
+  color: #CBE2F0;
+  padding-block: 28px;
+  margin-top: 8px;
+}
+
+.pie__fila { display: grid; gap: 6px; }
+.pie p { margin: 0; }
+.pie__marca { font-weight: 800; letter-spacing: .04em; color: var(--blanco); }
+.pie__cobertura, .pie__legal { font-size: .92rem; }
+.pie__legal { color: #8FB4CB; }
+
+/* ---------- Escritorio ---------- */
+
+@media (min-width: 860px) {
+  body { font-size: 18px; }
+
+  .hero { padding-block: 64px 76px; }
+
+  .hero__grilla {
+    grid-template-columns: 1.05fr .95fr;
+    align-items: center;
+    gap: 52px;
+  }
+
+  .tarjeta { padding: 28px; }
+
+  .pie__fila {
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
