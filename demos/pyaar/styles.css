@@ -272,6 +272,61 @@ a { color: inherit; }
 .opcion__texto strong { display: block; font-weight: 600; color: var(--azul-profundo); }
 .opcion__texto small { display: block; font-size: .9rem; color: var(--tinta-suave); }
 
+/* Campo de texto con comuna fija */
+
+.entrada {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--blanco);
+  overflow: hidden;
+}
+
+.entrada:focus-within {
+  border-color: var(--azul-accion);
+  box-shadow: 0 0 0 3px rgba(27, 143, 209, .18);
+}
+
+.entrada input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding: 15px 14px;
+  font: inherit;
+  font-size: 1.02rem;
+  color: var(--tinta);
+}
+
+.entrada input:focus { outline: none; }
+.entrada input::placeholder { color: #9AB2BF; }
+
+.entrada__fija {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  background: var(--celeste-claro);
+  border-left: 1px solid var(--linea);
+  color: var(--azul-profundo);
+  font-weight: 600;
+  font-size: .95rem;
+  white-space: nowrap;
+}
+
+.enlace {
+  border: 0;
+  background: none;
+  padding: 0;
+  margin-left: 8px;
+  font: inherit;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--azul-accion);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* Resumen de precios */
 
 .resumen {

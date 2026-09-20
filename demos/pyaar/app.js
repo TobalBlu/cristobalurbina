@@ -44,18 +44,19 @@ function aplicarConfig() {
 
 /* ---------- Estado del pedido ---------- */
 
-const pedido = {
+const estadoPedido = {
   recargas: CONFIG.MINIMO_RECARGAS,
-  necesitaBidon: false
+  necesitaBidon: false,
+  direccion: ""
 };
 
 /* ---------- Cantidad y total ---------- */
 
 function calcularTotal() {
-  const recargas = pedido.recargas * CONFIG.PRECIO_RECARGA;
+  const recargas = estadoPedido.recargas * CONFIG.PRECIO_RECARGA;
   const bidones =
-    pedido.necesitaBidon && CONFIG.VENDE_BIDON
-      ? pedido.recargas * CONFIG.PRECIO_BIDON
+    estadoPedido.necesitaBidon && CONFIG.VENDE_BIDON
+      ? estadoPedido.recargas * CONFIG.PRECIO_BIDON
       : 0;
   return { recargas, bidones, total: recargas + bidones };
 }
@@ -68,22 +69,22 @@ function pintarPedido() {
   const { recargas, bidones, total } = calcularTotal();
 
   // Contador
-  $("#cantidad-valor").textContent = pedido.recargas;
-  $("#menos").disabled = pedido.recargas <= CONFIG.MINIMO_RECARGAS;
-  $("#mas").disabled = pedido.recargas >= CONFIG.MAXIMO_RECARGAS;
+  $("#cantidad-valor").textContent = estadoPedido.recargas;
+  $("#menos").disabled = estadoPedido.recargas <= CONFIG.MINIMO_RECARGAS;
+  $("#mas").disabled = estadoPedido.recargas >= CONFIG.MAXIMO_RECARGAS;
 
   // Ayuda bajo el contador: solo aparece cuando explica un tope
   let ayuda = "";
-  if (pedido.recargas <= CONFIG.MINIMO_RECARGAS && CONFIG.MINIMO_RECARGAS > 1) {
+  if (estadoPedido.recargas <= CONFIG.MINIMO_RECARGAS && CONFIG.MINIMO_RECARGAS > 1) {
     ayuda = `El pedido mínimo es de ${CONFIG.MINIMO_RECARGAS} recargas.`;
-  } else if (pedido.recargas >= CONFIG.MAXIMO_RECARGAS) {
+  } else if (estadoPedido.recargas >= CONFIG.MAXIMO_RECARGAS) {
     ayuda = "¿Necesitas más? Escríbenos por WhatsApp y lo coordinamos.";
   }
   $("#ayuda-cantidad").textContent = ayuda;
 
   // Línea de recargas
   $("#detalle-recargas").textContent =
-    `${plural(pedido.recargas, "recarga", "recargas")} × ${pesos(CONFIG.PRECIO_RECARGA)}`;
+    `${plural(estadoPedido.recargas, "recarga", "recargas")} × ${pesos(CONFIG.PRECIO_RECARGA)}`;
   $("#monto-recargas").textContent = pesos(recargas);
 
   // Línea de bidones
@@ -91,7 +92,7 @@ function pintarPedido() {
   lineaBidones.hidden = bidones === 0;
   if (bidones > 0) {
     $("#detalle-bidones").textContent =
-      `${plural(pedido.recargas, "bidón nuevo", "bidones nuevos")} × ${pesos(CONFIG.PRECIO_BIDON)}`;
+      `${plural(estadoPedido.recargas, "bidón nuevo", "bidones nuevos")} × ${pesos(CONFIG.PRECIO_BIDON)}`;
     $("#monto-bidones").textContent = pesos(bidones);
   }
 
@@ -107,24 +108,77 @@ function activarFormulario() {
   }
 
   $("#menos").addEventListener("click", () => {
-    pedido.recargas = Math.max(CONFIG.MINIMO_RECARGAS, pedido.recargas - 1);
+    estadoPedido.recargas = Math.max(CONFIG.MINIMO_RECARGAS, estadoPedido.recargas - 1);
     pintarPedido();
   });
 
   $("#mas").addEventListener("click", () => {
-    pedido.recargas = Math.min(CONFIG.MAXIMO_RECARGAS, pedido.recargas + 1);
+    estadoPedido.recargas = Math.min(CONFIG.MAXIMO_RECARGAS, estadoPedido.recargas + 1);
     pintarPedido();
   });
 
   $("#necesita-bidon").addEventListener("change", (e) => {
-    pedido.necesitaBidon = e.target.checked;
+    estadoPedido.necesitaBidon = e.target.checked;
     pintarPedido();
   });
 
   pintarPedido();
 }
 
+/* ---------- Dirección (memoria del dispositivo) ---------- */
+
+/* Se guarda solo en el teléfono de la persona. No viaja a ningún servidor:
+   esta página no tiene backend. */
+
+const LLAVE_DIRECCION = "pyaar.direccion";
+
+function leerDireccionGuardada() {
+  try {
+    return localStorage.getItem(LLAVE_DIRECCION) || "";
+  } catch {
+    return ""; // modo incógnito o almacenamiento bloqueado
+  }
+}
+
+function guardarDireccion(valor) {
+  try {
+    if (valor) localStorage.setItem(LLAVE_DIRECCION, valor);
+    else localStorage.removeItem(LLAVE_DIRECCION);
+  } catch {
+    /* sin memoria disponible: el pedido funciona igual */
+  }
+}
+
+function activarDireccion() {
+  const campo = $("#direccion");
+  const aviso = $("#ayuda-direccion");
+
+  $("#entrada-comuna").textContent = CONFIG.COBERTURA;
+
+  const guardada = leerDireccionGuardada();
+  if (guardada) {
+    campo.value = guardada;
+    estadoPedido.direccion = guardada;
+    aviso.hidden = false;
+  }
+
+  campo.addEventListener("input", () => {
+    estadoPedido.direccion = campo.value.trim();
+    guardarDireccion(estadoPedido.direccion);
+    aviso.hidden = true; // ya no es "la del último pedido", es la que está escribiendo
+  });
+
+  $("#olvidar-direccion").addEventListener("click", () => {
+    campo.value = "";
+    estadoPedido.direccion = "";
+    guardarDireccion("");
+    aviso.hidden = true;
+    campo.focus();
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   aplicarConfig();
   activarFormulario();
+  activarDireccion();
 });

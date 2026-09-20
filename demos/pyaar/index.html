@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
 
@@ -78,6 +78,21 @@
             </label>
           </div>
 
+          <div class="campo">
+            <label class="campo__titulo" for="direccion">¿A dónde la llevamos?</label>
+            <div class="entrada">
+              <input type="text" id="direccion" autocomplete="street-address"
+                     placeholder="Calle, número, casa o depto" enterkeyhint="done">
+              <span class="entrada__fija" id="entrada-comuna">Maipú</span>
+            </div>
+            <p class="campo__ayuda" id="ayuda-direccion" hidden>
+              <span>Es la dirección de tu último pedido.</span>
+              <button type="button" class="enlace" id="olvidar-direccion">Usar otra</button>
+            </p>
+          </div>
+
+          <p class="pendiente">Horario de entrega (paso 4).</p>
+
           <div class="resumen">
             <div class="resumen__linea" id="linea-recargas">
               <span id="detalle-recargas"></span>
@@ -92,8 +107,6 @@
               <strong id="total"></strong>
             </div>
           </div>
-
-          <p class="pendiente">Dirección y horario de entrega (paso 3).</p>
         </div>
       </div>
 
@@ -110,7 +123,9 @@
   </div>
 </footer>
 
-<script src="config.js"></script>
-<script src="app.js"></script>
+<!-- El ?v=N obliga al navegador a descargar la versión nueva.
+     Sube el número cada vez que edites config.js, app.js o styles.css. -->
+<script src="config.js?v=3"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
