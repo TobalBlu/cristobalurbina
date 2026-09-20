@@ -38,6 +38,10 @@ const CONFIG = {
 
   /* --- Agenda ----------------------------------------- */
   DIAS_VISIBLES: 7,       // cuántos días muestra el calendario
+
+  /* Horas de anticipación mínima. Con 1, a las 12:30 ya no se ofrece
+     el bloque que termina a las 13:00. */
+  ANTICIPACION_HORAS: 1,
   BLOQUES: [
     { id: "mañana", etiqueta: "Mañana", horario: "9:00 a 13:00", desde: 9,  hasta: 13 },
     { id: "tarde",  etiqueta: "Tarde",  horario: "14:00 a 18:00", desde: 14, hasta: 18 },
