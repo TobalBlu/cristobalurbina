@@ -46,7 +46,7 @@ function aplicarConfig() {
 
 const estadoPedido = {
   recargas: CONFIG.MINIMO_RECARGAS,
-  necesitaBidon: false,
+  bidones: 0,
   direccion: "",
   modo: "pronto",   // "pronto" | "agendar"
   dia: null,        // objeto Date
@@ -57,10 +57,9 @@ const estadoPedido = {
 
 function calcularTotal() {
   const recargas = estadoPedido.recargas * CONFIG.PRECIO_RECARGA;
-  const bidones =
-    estadoPedido.necesitaBidon && CONFIG.VENDE_BIDON
-      ? estadoPedido.recargas * CONFIG.PRECIO_BIDON
-      : 0;
+  const bidones = CONFIG.VENDE_BIDON
+    ? estadoPedido.bidones * CONFIG.PRECIO_BIDON
+    : 0;
   return { recargas, bidones, total: recargas + bidones };
 }
 
@@ -69,6 +68,9 @@ function plural(n, singular, plural_) {
 }
 
 function pintarPedido() {
+  // Un bidón nuevo llega lleno: nunca puede haber más bidones que recargas.
+  estadoPedido.bidones = Math.min(estadoPedido.bidones, estadoPedido.recargas);
+
   const { recargas, bidones, total } = calcularTotal();
 
   // Contador
@@ -85,6 +87,23 @@ function pintarPedido() {
   }
   $("#ayuda-cantidad").textContent = ayuda;
 
+  // Contador de bidones
+  if (CONFIG.VENDE_BIDON) {
+    $("#bidones-valor").textContent = estadoPedido.bidones;
+    $("#menos-bidon").disabled = estadoPedido.bidones <= 0;
+    $("#mas-bidon").disabled = estadoPedido.bidones >= estadoPedido.recargas;
+
+    let ayudaBidon;
+    if (estadoPedido.bidones === 0) {
+      ayudaBidon = `Déjalo en 0 si tienes tus envases para intercambiar. Cada bidón nuevo cuesta ${pesos(CONFIG.PRECIO_BIDON)}.`;
+    } else if (estadoPedido.bidones >= estadoPedido.recargas) {
+      ayudaBidon = "Ya son todos nuevos: no puedes pedir más bidones que recargas.";
+    } else {
+      ayudaBidon = `${pesos(CONFIG.PRECIO_BIDON)} cada uno, más el agua que trae adentro.`;
+    }
+    $("#ayuda-bidon").textContent = ayudaBidon;
+  }
+
   // Línea de recargas
   $("#detalle-recargas").textContent =
     `${plural(estadoPedido.recargas, "recarga", "recargas")} × ${pesos(CONFIG.PRECIO_RECARGA)}`;
@@ -95,7 +114,7 @@ function pintarPedido() {
   lineaBidones.hidden = bidones === 0;
   if (bidones > 0) {
     $("#detalle-bidones").textContent =
-      `${plural(estadoPedido.recargas, "bidón nuevo", "bidones nuevos")} × ${pesos(CONFIG.PRECIO_BIDON)}`;
+      `${plural(estadoPedido.bidones, "bidón nuevo", "bidones nuevos")} × ${pesos(CONFIG.PRECIO_BIDON)}`;
     $("#monto-bidones").textContent = pesos(bidones);
   }
 
@@ -106,8 +125,16 @@ function activarFormulario() {
   // La casilla del bidón solo existe si el negocio lo vende
   if (CONFIG.VENDE_BIDON) {
     $("#campo-bidon").hidden = false;
-    $("#ayuda-bidon").textContent =
-      `Te llevamos uno por cada recarga: ${pesos(CONFIG.PRECIO_BIDON)} cada uno.`;
+
+    $("#menos-bidon").addEventListener("click", () => {
+      estadoPedido.bidones = Math.max(0, estadoPedido.bidones - 1);
+      pintarPedido();
+    });
+
+    $("#mas-bidon").addEventListener("click", () => {
+      estadoPedido.bidones = Math.min(estadoPedido.recargas, estadoPedido.bidones + 1);
+      pintarPedido();
+    });
   }
 
   $("#menos").addEventListener("click", () => {
@@ -117,11 +144,6 @@ function activarFormulario() {
 
   $("#mas").addEventListener("click", () => {
     estadoPedido.recargas = Math.min(CONFIG.MAXIMO_RECARGAS, estadoPedido.recargas + 1);
-    pintarPedido();
-  });
-
-  $("#necesita-bidon").addEventListener("change", (e) => {
-    estadoPedido.necesitaBidon = e.target.checked;
     pintarPedido();
   });
 
@@ -333,8 +355,8 @@ function armarMensaje() {
   const lineas = [
     `Hola ${CONFIG.NOMBRE}, quiero ${plural(estadoPedido.recargas, "recarga", "recargas")} de agua (${pesos(total)}).`
   ];
-  if (estadoPedido.necesitaBidon && CONFIG.VENDE_BIDON) {
-    lineas.push(`Incluye ${plural(estadoPedido.recargas, "bidón nuevo", "bidones nuevos")}, no tengo envase para intercambiar.`);
+  if (estadoPedido.bidones > 0 && CONFIG.VENDE_BIDON) {
+    lineas.push(`Incluye ${plural(estadoPedido.bidones, "bidón nuevo", "bidones nuevos")}: no tengo envase para ${estadoPedido.bidones === 1 ? "ese" : "esos"}.`);
   }
   lineas.push(`Dirección: ${estadoPedido.direccion}, ${CONFIG.COBERTURA}.`);
   lineas.push(`Horario: ${textoHorario()}.`);

@@ -239,35 +239,6 @@ a { color: inherit; }
   font-variant-numeric: tabular-nums;
 }
 
-/* Casilla del bidón */
-
-.opcion {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 14px;
-  border: 1px solid var(--linea);
-  border-radius: var(--radio);
-  cursor: pointer;
-}
-
-.opcion:has(input:checked) {
-  border-color: var(--azul-accion);
-  background: var(--celeste-claro);
-}
-
-.opcion input {
-  flex: none;
-  width: 24px;
-  height: 24px;
-  margin: 2px 0 0;
-  accent-color: var(--azul-accion);
-}
-
-.opcion__texto { display: block; }
-.opcion__texto strong { display: block; font-weight: 600; color: var(--azul-profundo); }
-.opcion__texto small { display: block; font-size: .9rem; color: var(--tinta-suave); }
-
 /* Campo de texto con comuna fija */
 
 .entrada {

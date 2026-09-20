@@ -13,14 +13,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
 <header class="barra">
   <div class="contenedor barra__fila">
     <a class="marca" href="#inicio">
-      <img class="marca__logo" src="logo.png?v=4" alt="PYAAR, agua purificada" width="720" height="442">
+      <img class="marca__logo" src="logo.png?v=5" alt="PYAAR, agua purificada" width="720" height="442">
     </a>
     <a class="barra__tel" id="tel-cabecera" href="#pedido">
       <span>Pedir ahora</span>
@@ -61,13 +61,13 @@
           </div>
 
           <div class="campo" id="campo-bidon" hidden>
-            <label class="opcion">
-              <input type="checkbox" id="necesita-bidon">
-              <span class="opcion__texto">
-                <strong>No tengo bidón para intercambiar</strong>
-                <small id="ayuda-bidon"></small>
-              </span>
-            </label>
+            <p class="campo__titulo" id="lbl-bidones">¿Necesitas bidones nuevos?</p>
+            <div class="contador" role="group" aria-labelledby="lbl-bidones">
+              <button type="button" class="contador__btn" id="menos-bidon" aria-label="Quitar un bidón">&minus;</button>
+              <span class="contador__valor" id="bidones-valor" aria-live="polite">0</span>
+              <button type="button" class="contador__btn" id="mas-bidon" aria-label="Agregar un bidón">+</button>
+            </div>
+            <p class="campo__ayuda" id="ayuda-bidon"></p>
           </div>
 
           <div class="campo">
@@ -140,7 +140,7 @@
 
 <!-- El ?v=N obliga al navegador a descargar la versión nueva.
      Sube el número cada vez que edites config.js, app.js o styles.css. -->
-<script src="config.js?v=4"></script>
-<script src="app.js?v=4"></script>
+<script src="config.js?v=5"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>
