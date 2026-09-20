@@ -496,7 +496,7 @@ a { color: inherit; }
 
   .hero__grilla {
     grid-template-columns: 1.05fr .95fr;
-    align-items: center;
+    align-items: start;
     gap: 52px;
   }
 
